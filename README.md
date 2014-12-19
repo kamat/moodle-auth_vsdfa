@@ -1,4 +1,4 @@
 moodle-auth_vsdfa
 =================
 
-Authentication from web service. 
+Authentication and update user profile from web service.
