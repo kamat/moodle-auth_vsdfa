@@ -1,0 +1,124 @@
+<?php
+    global $OUTPUT;
+    // set to defaults if undefined
+
+        if (!isset($config->createtokenurl)) {
+          $config->createtokenurl = '';
+        }
+        if(!isset($config->showtokenurl)) {
+          $config->showtokenurl = '';
+        };
+        if(!isset($config->logouturl)) {
+          $config->logouturl = '';
+        };
+        if(!isset($config->upgradeurl)) {
+          $config->upgradeurl = '';
+        };
+        if(!isset($config->registerurl)) {
+          $config->registerurl = '';
+        };
+
+        if (!isset($config->removeuser)) {
+          $config->removeuser = AUTH_REMOVEUSER_KEEP;
+        }
+
+?>
+<table cellspacing="0" cellpadding="5" border="0">
+
+<tr valign="top">
+    <td align="right"><label for="createtokenurl"><?php print_string("createtokenurl", "auth_vsdfa") ?></label></td>
+    <td>
+        <input id="createtokenurl" name="createtokenurl" type="text" size="30" value="<?php echo $config->createtokenurl?>" />
+        <?php
+
+        if (isset($err["createtokenurl"])) {
+            echo $OUTPUT->error_text($err["createtokenurl"]);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("help_createtokenurl", "auth_vsdfa") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><label for="showtokenurl"><?php print_string("showtokenurl", "auth_vsdfa") ?></label></td>
+    <td>
+        <input id="showtokenurl" name="showtokenurl" type="text" size="30" value="<?php echo $config->showtokenurl?>" />
+        <?php
+
+        if (isset($err["showtokenurl"])) {
+            echo $OUTPUT->error_text($err["showtokenurl"]);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("help_showtokenurl", "auth_vsdfa") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><label for="logouturl"><?php print_string("logouturl", "auth_vsdfa") ?></label></td>
+    <td>
+        <input id="logouturl" name="logouturl" type="text" size="30" value="<?php echo $config->logouturl?>" />
+        <?php
+
+        if (isset($err["logouturl"])) {
+            echo $OUTPUT->error_text($err["logouturl"]);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("help_logouturl", "auth_vsdfa") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><label for="upgradeurl"><?php print_string("upgradeurl", "auth_vsdfa") ?></label></td>
+    <td>
+        <input id="upgradeurl" name="upgradeurl" type="text" size="30" value="<?php echo $config->upgradeurl?>" />
+        <?php
+
+        if (isset($err["upgradeurl"])) {
+            echo $OUTPUT->error_text($err["upgradeurl"]);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("help_upgradeurl", "auth_vsdfa") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><label for="registerurl"><?php print_string("registerurl", "auth_vsdfa") ?></label></td>
+    <td>
+        <input id="registerurl" name="registerurl" type="text" size="30" value="<?php echo $config->registerurl?>" />
+        <?php
+
+        if (isset($err["registerurl"])) {
+            echo $OUTPUT->error_text($err["registerurl"]);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("help_registerurl", "auth_vsdfa") ?></td>
+</tr>
+
+<tr valign="top">
+    <td align="right"><label for="menuremoveuser"><?php print_string('auth_remove_user_key','auth') ?></label></td>
+    <td>
+    <?php
+       $deleteopt = array();
+       $deleteopt[AUTH_REMOVEUSER_KEEP] = get_string('auth_remove_keep','auth');
+       $deleteopt[AUTH_REMOVEUSER_SUSPEND] = get_string('auth_remove_suspend','auth');
+       $deleteopt[AUTH_REMOVEUSER_FULLDELETE] = get_string('auth_remove_delete','auth');
+       echo html_writer::select($deleteopt, 'removeuser', $config->removeuser, false);
+    ?>
+    </td>
+    <td>
+    <?php print_string('auth_remove_user','auth') ?>
+    </td>
+</tr>
+
+<?php
+
+print_auth_lock_options($this->authtype, $user_fields, get_string('auth_dbextrafields', 'auth_db'), true, true, $this->get_custom_user_profile_fields());
+
+?>
+</table>
